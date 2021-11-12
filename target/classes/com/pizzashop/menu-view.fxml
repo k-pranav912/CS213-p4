@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="3.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Enter Phone Number" />
+            <HBox alignment="CENTER" prefHeight="32.0" prefWidth="250.0" spacing="5.0">
+               <children>
+                  <TextField />
+                  <Button mnemonicParsing="false" text="Start Order" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="250.0" spacing="5.0">
+               <children>
+                  <ComboBox prefHeight="25.0" prefWidth="149.0" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Add Pizza" />
+               </children>
+               <VBox.margin>
+                  <Insets left="2.0" right="2.0" />
+               </VBox.margin>
+            </HBox>
+            <Button mnemonicParsing="false" prefWidth="130.0" text="Check Current Order">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefWidth="130.0" text="Check Store Orders">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <TextArea editable="false" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </BorderPane.margin></TextArea>
+   </bottom>
+</BorderPane>
