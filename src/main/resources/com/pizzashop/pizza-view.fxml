@@ -21,10 +21,15 @@
                   <Label text="Size: (default small) $1.49 per upgrade" />
                   <HBox prefHeight="21.0" prefWidth="349.0" spacing="10.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Medium">
+                        <RadioButton mnemonicParsing="false" text="Small">
                            <toggleGroup>
                               <ToggleGroup fx:id="pizzaViewSizeToggle" />
                            </toggleGroup></RadioButton>
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Medium">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="pizzaViewSizeToggle1" />
+                           </toggleGroup>
+                        </RadioButton>
                         <RadioButton mnemonicParsing="false" text="Large" toggleGroup="$pizzaViewSizeToggle" />
                      </children>
                   </HBox>
@@ -70,15 +75,22 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox prefHeight="44.0" prefWidth="345.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="44.0" prefWidth="345.0" spacing="20.0">
                      <children>
-                        <Label text="\$">
+                        <Label text="Price">
                            <HBox.margin>
-                              <Insets top="4.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="s1PriceTextField" editable="false" promptText="0.00" />
-                        <Button fx:id="s1PriceButton" mnemonicParsing="false" onAction="#updatePrice" text="Update Price" />
+                              <Insets top="3.0" />
+                           </HBox.margin></Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="\$">
+                                 <HBox.margin>
+                                    <Insets top="4.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="s1PriceTextField" editable="false" promptText="0.00" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="345.0" spacing="40.0">
