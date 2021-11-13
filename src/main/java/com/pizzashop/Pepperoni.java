@@ -14,7 +14,9 @@ public class Pepperoni extends Pizza{
             case MEDIUM -> sizePrice = SMALL_PRICE + SIZE_INCREASE_PRICE;
             case LARGE -> sizePrice = SMALL_PRICE + SIZE_INCREASE_PRICE + SIZE_INCREASE_PRICE;
         }
-        return sizePrice + (toppings.size() - MIN_TOPPINGS) * TOPPING_PRICE;
+        int temp = toppings.size() - MIN_TOPPINGS;
+        if (temp < MIN_TOPPINGS) temp = 0;
+        return sizePrice + (temp) * TOPPING_PRICE;
     }
 
     @Override

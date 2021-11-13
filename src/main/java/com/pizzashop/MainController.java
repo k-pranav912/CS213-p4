@@ -78,9 +78,35 @@ public class MainController {
     }
 
     @FXML
-    void addHawaiian(ActionEvent event) {}
+    void addHawaiian(ActionEvent event) throws IOException {
+        s0TextArea.setText("Hello\n");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
+        PizzaCustomizationController controller = new PizzaCustomizationController("Hawaiian");
+        loader.setController(controller);
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load(), 600, 400);
+        PizzaCustomizationController pizzaView = loader.getController();
+        pizzaView.setMainController(this);
+        stage.setResizable(false);
+        stage.setTitle("Pizza Customization");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
-    void addDeluxe(ActionEvent event) {}
+    void addDeluxe(ActionEvent event) throws IOException {
+        s0TextArea.setText("Hello\n");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
+        PizzaCustomizationController controller = new PizzaCustomizationController("Deluxe");
+        loader.setController(controller);
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load(), 600, 400);
+        PizzaCustomizationController pizzaView = loader.getController();
+        pizzaView.setMainController(this);
+        stage.setResizable(false);
+        stage.setTitle("Pizza Customization");
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

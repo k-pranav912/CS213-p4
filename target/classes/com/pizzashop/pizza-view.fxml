@@ -18,7 +18,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Size: (default small) $1.49 per upgrade" />
+                  <Label text="Size: (default small) $2.00 per upgrade" />
                   <HBox prefHeight="21.0" prefWidth="349.0" spacing="10.0">
                      <children>
                         <RadioButton fx:id="s1Small" mnemonicParsing="false" onAction="#selectSmall" text="Small">
@@ -47,22 +47,22 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ListView prefHeight="200.0" prefWidth="200.0" />
+                              <ListView fx:id="s1AvailableList" prefHeight="200.0" prefWidth="200.0" />
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="=&gt;">
+                                    <Button fx:id="s1AddButon" mnemonicParsing="false" onAction="#addTopping" text="=&gt;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="&lt;=">
+                                    <Button fx:id="s1RemoveButton" mnemonicParsing="false" onAction="#removeTopping" text="&lt;=">
                                        <VBox.margin>
                                           <Insets top="5.0" />
                                        </VBox.margin>
                                     </Button>
                                  </children>
                               </VBox>
-                              <ListView prefHeight="200.0" prefWidth="200.0">
+                              <ListView fx:id="s1SelectedList" prefHeight="200.0" prefWidth="200.0">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
