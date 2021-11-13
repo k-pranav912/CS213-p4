@@ -21,8 +21,11 @@
                   <Label text="Size: (default small) $1.49 per upgrade" />
                   <HBox prefHeight="21.0" prefWidth="349.0" spacing="10.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Medium" />
-                        <RadioButton mnemonicParsing="false" text="Large" />
+                        <RadioButton mnemonicParsing="false" text="Medium">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="pizzaViewSizeToggle" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Large" toggleGroup="$pizzaViewSizeToggle" />
                      </children>
                   </HBox>
                   <VBox prefHeight="135.0" prefWidth="349.0">
@@ -80,7 +83,6 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="345.0" spacing="40.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Back to Main Menu" />
                         <Button mnemonicParsing="false" text="Add to Order" />
                      </children>
                   </HBox>
