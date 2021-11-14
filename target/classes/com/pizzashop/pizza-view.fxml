@@ -91,7 +91,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="345.0" spacing="40.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Add to Order" />
+                        <Button fx:id="s0AddToOrderButton" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order" />
                      </children>
                   </HBox>
                </children>
