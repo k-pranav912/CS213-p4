@@ -26,12 +26,12 @@
                   <Insets left="2.0" right="2.0" />
                </VBox.margin>
             </HBox>
-            <Button mnemonicParsing="false" prefWidth="130.0" text="Check Current Order">
+            <Button fx:id="s0CheckCurrentOrderButton" mnemonicParsing="false" onAction="#checkOrder" prefWidth="130.0" text="Check Current Order">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="130.0" text="Check Store Orders">
+            <Button fx:id="s0CheckStoreOrderButton" mnemonicParsing="false" onAction="#checkStore" prefWidth="130.0" text="Check Store Orders">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

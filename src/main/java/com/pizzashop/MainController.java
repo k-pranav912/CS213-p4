@@ -25,6 +25,12 @@ public class MainController {
     @FXML
     private TextField s0PhoneTextField;
 
+    @FXML
+    private Button s0CheckCurrentOrderButton;
+
+    @FXML
+    private Button s0CheckStoreOrderButton;
+
     private static final int TEN_DIGIT_NUMBER = 1000000000;
 
     @FXML
@@ -47,6 +53,10 @@ public class MainController {
         return currentOrder;
     }
 
+    public void setOrderNull() {this.currentOrder = null;}
+
+    public void clearPhoneField() {s0PhoneTextField.setText("");}
+
     @FXML
     void startOrder(ActionEvent event) throws NumberFormatException {
         currentOrder = null;
@@ -62,11 +72,13 @@ public class MainController {
             return;
         }
 
+        //TODO: isnt working
         if (phoneNumber / TEN_DIGIT_NUMBER < 0 || phoneNumber / TEN_DIGIT_NUMBER > 9) {
             s0TextArea.setText("Enter Valid Phone Number (10 digit number, no spaces, parentheses, or hyphens)");
         }
 
         this.currentOrder = new Order(phoneNumber);
+        s0TextArea.appendText("Order started, in progress.\n");
 
         if (store.checkOrder(this.currentOrder)) {
             s0TextArea.setText("Order already exists.\n");
@@ -78,7 +90,10 @@ public class MainController {
 
     @FXML
     void addPepperoni(ActionEvent event) throws IOException {
-        s0TextArea.setText("Hello\n");
+        if (this.currentOrder == null) {
+            s0TextArea.appendText("Please initiate an order first.\n");
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
         PizzaCustomizationController controller = new PizzaCustomizationController("Pepperoni");
         loader.setController(controller);
@@ -94,7 +109,10 @@ public class MainController {
 
     @FXML
     void addHawaiian(ActionEvent event) throws IOException {
-        s0TextArea.setText("Hello\n");
+        if (this.currentOrder == null) {
+            s0TextArea.appendText("Please initiate an order first.\n");
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
         PizzaCustomizationController controller = new PizzaCustomizationController("Hawaiian");
         loader.setController(controller);
@@ -110,7 +128,10 @@ public class MainController {
 
     @FXML
     void addDeluxe(ActionEvent event) throws IOException {
-        s0TextArea.setText("Hello\n");
+        if (this.currentOrder == null) {
+            s0TextArea.appendText("Please initiate an order first.\n");
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
         PizzaCustomizationController controller = new PizzaCustomizationController("Deluxe");
         loader.setController(controller);
@@ -120,6 +141,41 @@ public class MainController {
         pizzaView.setMainController(this);
         stage.setResizable(false);
         stage.setTitle("Pizza Customization");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void checkOrder(ActionEvent event) throws IOException {
+        if (this.currentOrder == null) {
+            s0TextArea.appendText("Please initiate an order first.\n");
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("order-view.fxml"));
+        CurrentOrderController controller = new CurrentOrderController();
+        controller.setMainController(this);
+        loader.setController(controller);
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load(), 500, 400);
+        CurrentOrderController orderView = loader.getController();
+        orderView.setPhoneNumber();
+        stage.setResizable(false);
+        stage.setTitle("Current Order");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void checkStore(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("store-view.fxml"));
+        StoreOrderController controller = new StoreOrderController();
+        controller.setMainController(this);
+        loader.setController(controller);
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load(), 500, 300);
+        StoreOrderController storeView = loader.getController();
+        stage.setResizable(false);
+        stage.setTitle("Store Orders");
         stage.setScene(scene);
         stage.show();
     }

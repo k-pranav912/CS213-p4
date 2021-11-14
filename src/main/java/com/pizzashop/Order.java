@@ -35,6 +35,8 @@ public class Order {
 
     public int getPhoneNumber() {return this.phoneNumber;}
 
+    public ArrayList<Pizza> getList() {return this.pizzas;}
+
     @Override
     public String toString() {
         String orderString = phoneNumber + ":\n";

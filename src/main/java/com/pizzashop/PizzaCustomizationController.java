@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,9 @@ public class PizzaCustomizationController {
 
     @FXML
     private Button s1RemoveButton;
+
+    @FXML
+    private Button s0AddToOrderButton;
 
     private MainController mainController;
 
@@ -117,6 +121,8 @@ public class PizzaCustomizationController {
     @FXML
     public void addToOrder(ActionEvent event) {
         mainController.getCurrentOrder().add(this.pizza);
+        Stage stage = (Stage) s0AddToOrderButton.getScene().getWindow();
+        stage.close();
 
     }
 
