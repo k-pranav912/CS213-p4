@@ -61,20 +61,14 @@ public class MainController {
     void startOrder(ActionEvent event) throws NumberFormatException {
         currentOrder = null;
         String temp = s0PhoneTextField.getText();
-        int phoneNumber = 0;
-        if (temp.equals("")) s0TextArea.setText("Enter Valid Phone Number (10 digit number: no spaces, " +
-                                                                                     "parentheses, or hyphens)\n");
+        long phoneNumber = 0;
+        if (temp.equals("")) s0TextArea.setText("Enter Valid Phone Number\n");
 
         try {
-            phoneNumber = Integer.parseInt(temp);
+            phoneNumber = Long.parseLong(temp);
         } catch (NumberFormatException e) {
-            s0TextArea.setText("Enter Valid Phone Number (10 digit number: no spaces, parentheses, or hyphens)\n");
+            s0TextArea.setText("Enter Valid Phone Number\n");
             return;
-        }
-
-        //TODO: isnt working
-        if (phoneNumber / TEN_DIGIT_NUMBER < 0 || phoneNumber / TEN_DIGIT_NUMBER > 9) {
-            s0TextArea.setText("Enter Valid Phone Number (10 digit number: no spaces, parentheses, or hyphens)");
         }
 
         this.currentOrder = new Order(phoneNumber);

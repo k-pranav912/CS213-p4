@@ -7,8 +7,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
+
 public class StoreOrderController {
 
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     private MainController mainController;
     @FXML
     private TextArea s3TextArea;
@@ -22,6 +28,9 @@ public class StoreOrderController {
     @FXML
     private Button s3DeleteOrderButton;
 
+    @FXML
+    private TextField s3ExportTextField;
+
     public void setMainController(MainController controller) {
         mainController = controller;
     }
@@ -29,6 +38,7 @@ public class StoreOrderController {
     public void initialize() {
         s3TextArea.setText(mainController.getStore().toString());
         s3ComboBox.getItems().addAll(this.mainController.getStore().orders);
+        s3TotalPriceTextField.setText(df.format(this.mainController.getStore().calculateTotal()) + "");
     }
 
     @FXML
@@ -39,6 +49,17 @@ public class StoreOrderController {
         s3ComboBox.getItems().clear();
         s3ComboBox.getItems().addAll(this.mainController.getStore().orders);
         s3TextArea.setText(mainController.getStore().toString());
+        s3TotalPriceTextField.setText(df.format(this.mainController.getStore().calculateTotal()) + "");
+        s3ExportTextField.setText("");
+    }
+
+    @FXML
+    public void export(ActionEvent event) throws FileNotFoundException {
+        File file = new File("StoreOrders.txt");
+        PrintWriter pw = new PrintWriter(file);
+        pw.print(mainController.getStore().toString());
+        pw.close();
+        s3ExportTextField.setText("File Created: StoreOrders.txt");
     }
 }
 

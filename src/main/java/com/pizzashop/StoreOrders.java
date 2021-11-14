@@ -1,9 +1,11 @@
 package com.pizzashop;
 
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class StoreOrders {
     ArrayList<Order> orders;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     public StoreOrders() {
          orders = new ArrayList<Order>();
     }
@@ -39,11 +41,17 @@ public class StoreOrders {
         return salesTax;
     }
 
+    public double calculateTotal() {
+        return this.calculateSalesTax() + this.calculateSubtotal();
+    }
+
     @Override
     public String toString() {
-        String storeOrdersString = "";
+        String storeOrdersString = "*************************************\n";
         for (int i = 0; i < orders.size(); i++) {
-            storeOrdersString += (i + 1) + ") " + orders.get(i).toString();
+            storeOrdersString += orders.get(i).toString() + "Price of Order: $"
+                                                + df.format(orders.get(i).getTotal()) +"\n";
+            storeOrdersString += "*************************************\n";
         }
         return storeOrdersString;
     }

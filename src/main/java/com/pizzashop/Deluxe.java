@@ -18,7 +18,9 @@ public class Deluxe extends Pizza{
             case MEDIUM -> sizePrice = SMALL_PRICE + SIZE_INCREASE_PRICE;
             case LARGE -> sizePrice = SMALL_PRICE + SIZE_INCREASE_PRICE + SIZE_INCREASE_PRICE;
         }
-        return sizePrice + (toppings.size() - MIN_TOPPINGS) * TOPPING_PRICE;
+        int temp = toppings.size() - MIN_TOPPINGS;
+        if (temp < 0) temp = 0;
+        return sizePrice + (temp) * TOPPING_PRICE;
     }
     @Override
     public String toString() {

@@ -3,11 +3,11 @@ package com.pizzashop;
 import java.util.ArrayList;
 
 public class Order {
-    private int phoneNumber;
+    private long phoneNumber;
     private ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
-    private static final double SALES_TAX = 6.625;
+    private static final double SALES_TAX = .06625;
 
-    public Order(int phoneNumber) {
+    public Order(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     public void add(Pizza pizza) {
@@ -33,17 +33,16 @@ public class Order {
         return this.getSubTotal() + this.getSalesTax();
     }
 
-    public int getPhoneNumber() {return this.phoneNumber;}
+    public long getPhoneNumber() {return this.phoneNumber;}
 
     public ArrayList<Pizza> getList() {return this.pizzas;}
 
     @Override
     public String toString() {
-        String orderString = phoneNumber + ":\n";
+        String orderString = "Phone #: " + phoneNumber + "\n";
         for (int i = 0; i < pizzas.size(); i++) {
             orderString += (i + 1) + ". " + pizzas.get(i).toString();
         }
-        orderString += "End of Order";
         return orderString;
     }
 }
