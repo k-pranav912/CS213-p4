@@ -25,6 +25,8 @@ public class MainController {
     @FXML
     private TextField s0PhoneTextField;
 
+    private static final int TEN_DIGIT_NUMBER = 1000000000;
+
     @FXML
     public void initialize() {
     }
@@ -37,18 +39,31 @@ public class MainController {
         this.currentOrder = null;
     }
 
+    public StoreOrders getStore() {
+        return store;
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
     @FXML
     void startOrder(ActionEvent event) throws NumberFormatException {
         currentOrder = null;
         String temp = s0PhoneTextField.getText();
         int phoneNumber = 0;
-        if (temp.equals("")) s0TextArea.setText("Enter Valid Phone Number\n");
+        if (temp.equals("")) s0TextArea.setText("Enter Valid Phone Number (10 digit number, no spaces, " +
+                                                                                     "parentheses, or hyphens)\n");
 
         try {
             phoneNumber = Integer.parseInt(temp);
         } catch (NumberFormatException e) {
-            s0TextArea.setText("Enter Valid Phone Number\n");
+            s0TextArea.setText("Enter Valid Phone Number (10 digit number, no spaces, parentheses, or hyphens)\n");
             return;
+        }
+
+        if (phoneNumber / TEN_DIGIT_NUMBER < 0 || phoneNumber / TEN_DIGIT_NUMBER > 9) {
+            s0TextArea.setText("Enter Valid Phone Number (10 digit number, no spaces, parentheses, or hyphens)");
         }
 
         this.currentOrder = new Order(phoneNumber);

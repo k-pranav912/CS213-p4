@@ -23,11 +23,27 @@ public class StoreOrders {
         orders.remove(order);
     }
 
+    public double calculateSubtotal() {
+        double subTotal = 0;
+        for (Order x: orders) {
+            subTotal += x.getSubTotal();
+        }
+        return subTotal;
+    }
+
+    public double calculateSalesTax() {
+        double salesTax = 0;
+        for (Order x: orders) {
+            salesTax += x.getSalesTax();
+        }
+        return salesTax;
+    }
+
     @Override
     public String toString() {
         String storeOrdersString = "";
         for (int i = 0; i < orders.size(); i++) {
-            storeOrdersString += orders.get(i).toString();
+            storeOrdersString += (i + 1) + ") " + orders.get(i).toString();
         }
         return storeOrdersString;
     }

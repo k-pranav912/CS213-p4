@@ -11,14 +11,8 @@ import java.util.List;
 
 public class PizzaCustomizationController {
 
-    private static final double pepperoniPrice = 8.99;
-    private static final double hawaiianPrice = 10.99;
-    private static final double deluxePrice = 12.99;
-    private static final double sizeUpgradePrice = 2.00;
-
     private Pizza pizza;
     private ObservableList<Topping> availableToppings = FXCollections.observableArrayList(Topping.values());
-
 
     @FXML
     private TextField s1PriceTextField;
@@ -95,7 +89,7 @@ public class PizzaCustomizationController {
     }
 
     @FXML
-    public void addTopping() {
+    public void addTopping(ActionEvent event) {
         if (s1AvailableList.getSelectionModel().getSelectedItem() == null) return;
         if (this.pizza.toppings.size() == this.pizza.getMaxSize()) {
             s1TextArea.setText("You can only have max 7 toppings.\n");
@@ -110,7 +104,7 @@ public class PizzaCustomizationController {
     }
 
     @FXML
-    public void removeTopping() {
+    public void removeTopping(ActionEvent event) {
         if (s1SelectedList.getSelectionModel().getSelectedItem() == null) return;
         this.availableToppings.add(s1SelectedList.getSelectionModel().getSelectedItem());
         this.pizza.toppings.remove(s1SelectedList.getSelectionModel().getSelectedItem());
@@ -118,6 +112,12 @@ public class PizzaCustomizationController {
         s1AvailableList.setItems(this.availableToppings);
         s1TextArea.setText(this.pizza.toString());
         s1PriceTextField.setText(this.pizza.price() + "");
+    }
+
+    @FXML
+    public void addToOrder(ActionEvent event) {
+        mainController.getCurrentOrder().add(this.pizza);
+
     }
 
 

@@ -28,6 +28,7 @@ public class Order {
         return this.getSubTotal() * SALES_TAX;
     }
 
+    //Might be not needed
     public double getTotal() {
         return this.getSubTotal() + this.getSalesTax();
     }
@@ -36,10 +37,11 @@ public class Order {
 
     @Override
     public String toString() {
-        String orderString = "";
+        String orderString = phoneNumber + ":\n";
         for (int i = 0; i < pizzas.size(); i++) {
-            orderString += pizzas.get(i).toString();
+            orderString += (i + 1) + ". " + pizzas.get(i).toString();
         }
+        orderString += "End of Order";
         return orderString;
     }
 }
