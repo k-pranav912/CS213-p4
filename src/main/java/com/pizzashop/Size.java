@@ -1,8 +1,15 @@
 package com.pizzashop;
 
+/**
+ * Enumertated class for the pizza sizes: small, medium, or large
+ */
 public enum Size {
     SMALL, MEDIUM, LARGE;
 
+    /**
+     * Converts Size to string description
+     * @return String describing its size
+     */
     @Override
     public String toString() {
         switch (this) {

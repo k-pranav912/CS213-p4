@@ -6,9 +6,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.text.DecimalFormat;
 
+/**
+ * The CurrentOrderController class, which controls the Current Order GUI. Handles removing pizzas from the order,
+ * displaying the subtotal, sales tax, and total prices, and placing the order.
+ */
 public class CurrentOrderController {
     private MainController mainController;
 
@@ -35,22 +38,27 @@ public class CurrentOrderController {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
+    /**
+     * Sets the Main Menu controller for access to its methods
+     * @param controller
+     */
     public void setMainController(MainController controller) {
         this.mainController = controller;
     }
 
-    public void setPhoneNumber() {
-
-    }
-
-    public CurrentOrderController() {}
-
+    /**
+     * Calculates and displays the subtotal, sales tax, and total prices
+     */
     private void calcTotals() {
         s2SubTotalTextField.setText(df.format(mainController.getCurrentOrder().getSubTotal()));
         s2SalesTaxTextField.setText(df.format(mainController.getCurrentOrder().getSalesTax()));
         s2TotalTextField.setText(df.format(mainController.getCurrentOrder().getTotal()));
     }
 
+    /**
+     * Initializes the phone number text field, the text field and combo box to show the pizzas in the order,
+     * as well as calculate the totals.
+     */
     @FXML
     public void initialize() {
         s2PhoneTextField.setText(mainController.getCurrentOrder().getPhoneNumber() + "");
@@ -59,6 +67,9 @@ public class CurrentOrderController {
         s2TextArea.setText(mainController.getCurrentOrder().toString());
     }
 
+    /**
+     * Removes a pizza from the order and recalculates the totals
+     */
     @FXML
     public void removePizza() {
         if (s2ComboBox.getSelectionModel().getSelectedItem() == null) return;
@@ -70,6 +81,9 @@ public class CurrentOrderController {
         s2TextArea.setText(mainController.getCurrentOrder().toString());
     }
 
+    /**
+     * Places the order and closes the Current Order stage
+     */
     @FXML
     public void placeOrder() {
         if (mainController.getCurrentOrder().getTotal() == 0) {
@@ -82,5 +96,4 @@ public class CurrentOrderController {
         stage.close();
         mainController.clearPhoneField();
     }
-
 }

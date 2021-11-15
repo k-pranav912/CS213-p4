@@ -7,12 +7,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The Main class, which handles setting up and running the Main Menu GUI
+ */
 public class Main extends Application {
 
+    /**
+     * Calls launch(args) to launch the GUI
+     * @param args Arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Starts the Main Menu GUI, sets up the scene and stage, and loads the FXML file
+     * @param primaryStage Stage to be displayed to the user
+     * @throws IOException Errors from GUI I/O
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));

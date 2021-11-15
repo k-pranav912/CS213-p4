@@ -1,8 +1,15 @@
 package com.pizzashop;
 
+/**
+ * Enumerated class for the 11 available toppings
+ */
 public enum Topping {
     PEPPERONI, PINEAPPLE, CHICKEN, BEEF, HAM, OLIVES, EXTRA_CHEESE, SAUSAGE, GREEN_PEPPER, ONION, MUSHROOM;
 
+    /**
+     * Converts Topping into string equivalent
+     * @return String describing the topping
+     */
     @Override
     public String toString() {
         switch (this) {
