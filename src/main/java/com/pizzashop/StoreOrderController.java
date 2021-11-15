@@ -2,7 +2,6 @@ package com.pizzashop;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,9 +23,6 @@ public class StoreOrderController {
 
     @FXML
     private ComboBox<Order> s3ComboBox;
-
-    @FXML
-    private Button s3DeleteOrderButton;
 
     @FXML
     private TextField s3ExportTextField;
@@ -55,6 +51,10 @@ public class StoreOrderController {
 
     @FXML
     public void export(ActionEvent event) throws FileNotFoundException {
+        if (mainController.getStore().orders.isEmpty()) {
+            s3ExportTextField.setText("No orders available to export.");
+            return;
+        }
         File file = new File("StoreOrders.txt");
         PrintWriter pw = new PrintWriter(file);
         pw.print(mainController.getStore().toString());

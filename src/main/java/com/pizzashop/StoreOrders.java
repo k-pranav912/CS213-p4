@@ -47,6 +47,7 @@ public class StoreOrders {
 
     @Override
     public String toString() {
+        if (orders.size() < 1) return "";
         String storeOrdersString = "*************************************\n";
         for (int i = 0; i < orders.size(); i++) {
             storeOrdersString += orders.get(i).toString() + "Price of Order: $"
@@ -54,16 +55,5 @@ public class StoreOrders {
             storeOrdersString += "*************************************\n";
         }
         return storeOrdersString;
-    }
-
-    public static void main(String[] args) {
-        StoreOrders list = new StoreOrders();
-
-        Order a1 = new Order(12345);
-        list.add(a1);
-
-        Order a2 = new Order(12345);
-
-        System.out.println(list.checkOrder(a2));
     }
 }

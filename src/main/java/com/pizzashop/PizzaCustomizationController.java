@@ -9,12 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class PizzaCustomizationController {
 
@@ -31,9 +27,6 @@ public class PizzaCustomizationController {
     private TextArea s1TextArea;
 
     @FXML
-    private ToggleGroup pizzaViewSizeToggle;
-
-    @FXML
     private RadioButton s1Small;
 
     @FXML
@@ -47,12 +40,6 @@ public class PizzaCustomizationController {
 
     @FXML
     private ListView<Topping> s1SelectedList;
-
-    @FXML
-    private Button s1AddButton;
-
-    @FXML
-    private Button s1RemoveButton;
 
     @FXML
     private Button s1AddToOrderButton;

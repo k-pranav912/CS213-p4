@@ -1,12 +1,9 @@
 package com.pizzashop;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,14 +21,6 @@ public class MainController {
 
     @FXML
     private TextField s0PhoneTextField;
-
-    @FXML
-    private Button s0CheckCurrentOrderButton;
-
-    @FXML
-    private Button s0CheckStoreOrderButton;
-
-    private static final int TEN_DIGIT_NUMBER = 1000000000;
 
     @FXML
     public void initialize() {
@@ -71,11 +60,16 @@ public class MainController {
             return;
         }
 
+        if (phoneNumber < 0) {
+            s0TextArea.setText("Enter Valid Phone Number\n");
+            return;
+        }
+
         this.currentOrder = new Order(phoneNumber);
-        s0TextArea.appendText("Order started, in progress.\n");
+        s0TextArea.setText("Order " + phoneNumber + " started.\n");
 
         if (store.checkOrder(this.currentOrder)) {
-            s0TextArea.setText("Order already exists.\n");
+            s0TextArea.setText("Order " + phoneNumber + " already exists.\n");
             currentOrder = null;
             return;
         }
@@ -85,7 +79,7 @@ public class MainController {
     @FXML
     void addPepperoni(ActionEvent event) throws IOException {
         if (this.currentOrder == null) {
-            s0TextArea.appendText("Please initiate an order first.\n");
+            s0TextArea.setText("Please initiate an order first.\n");
             return;
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
@@ -123,7 +117,7 @@ public class MainController {
     @FXML
     void addDeluxe(ActionEvent event) throws IOException {
         if (this.currentOrder == null) {
-            s0TextArea.appendText("Please initiate an order first.\n");
+            s0TextArea.setText("Please initiate an order first.\n");
             return;
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
@@ -142,9 +136,10 @@ public class MainController {
     @FXML
     void checkOrder(ActionEvent event) throws IOException {
         if (this.currentOrder == null) {
-            s0TextArea.appendText("Please initiate an order first.\n");
+            s0TextArea.setText("Please initiate an order first.\n");
             return;
         }
+        s0TextArea.setText("");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("order-view.fxml"));
         CurrentOrderController controller = new CurrentOrderController();
         controller.setMainController(this);

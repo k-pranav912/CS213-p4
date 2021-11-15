@@ -1,7 +1,6 @@
 package com.pizzashop;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -21,9 +20,6 @@ public class CurrentOrderController {
 
     @FXML
     private ComboBox<Pizza> s2ComboBox;
-
-    @FXML
-    private Button s2RemoveButton;
 
     @FXML
     private Button s2PlaceOrderButton;
@@ -76,12 +72,15 @@ public class CurrentOrderController {
 
     @FXML
     public void placeOrder() {
+        if (mainController.getCurrentOrder().getTotal() == 0) {
+            s2TextArea.setText("Cannot place an empty order.\nPlease return to the main menu.\n");
+            return;
+        }
         mainController.getStore().add(mainController.getCurrentOrder());
         mainController.setOrderNull();
         Stage stage = (Stage) s2PlaceOrderButton.getScene().getWindow();
         stage.close();
         mainController.clearPhoneField();
-
     }
 
 }
