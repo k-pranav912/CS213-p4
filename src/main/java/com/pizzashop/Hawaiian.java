@@ -22,6 +22,9 @@ public class Hawaiian extends Pizza{
      * @return The pizzas price as a double
      */
     public double price() {
+        if (toppings.size() > MAX_TOPPINGS) {
+            return -1;
+        }
         double sizePrice = 0;
         switch (size) {
             case SMALL -> sizePrice = SMALL_PRICE;

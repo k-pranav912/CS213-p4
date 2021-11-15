@@ -1,8 +1,5 @@
 package com.pizzashop;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 
 /**
@@ -10,8 +7,7 @@ import java.util.ArrayList;
  * three abstract methods, toString(), getImagePath(), and price().
  */
 public abstract class Pizza {
-    //protected ArrayList<Topping> toppings = new ArrayList<Topping>();
-    protected ObservableList<Topping> toppings = FXCollections.observableArrayList();
+    protected ArrayList<Topping> toppings = new ArrayList<Topping>();
     protected Size size;
 
     protected static final double SIZE_INCREASE_PRICE = 2;

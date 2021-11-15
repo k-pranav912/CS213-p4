@@ -4,21 +4,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * The MainController class, which controls the Main Menu GUI. This controller sends you to the corresponding
  * GUI when adding a pizza, checking an order, or checking the store orders.
  */
 public class MainController {
-
-    @FXML
-    private ComboBox<String> s0ComboBox;
 
     @FXML
     private TextArea s0TextArea;
@@ -28,9 +25,11 @@ public class MainController {
 
     private StoreOrders store;
     private Order currentOrder;
+    private ArrayList<Stage> pizzaStages = new ArrayList<Stage>();
+    private Stage orderStage;
 
     /**
-     * MainController constructore, which creates the Store Orders (store) and initializes currentOrder
+     * MainController constructor, which creates the Store Orders (store) and initializes currentOrder
      */
     public MainController() {
         this.store = new StoreOrders();
@@ -68,13 +67,12 @@ public class MainController {
     }
 
     /**
-     * Intializes an order based on the user entered phone number, if it is not already on order or invalid
+     * Initializes an order based on the user entered phone number, if it is not already on order or invalid
      * @param event Event when user presses the Start Order button
      * @throws NumberFormatException If the Phone Number was not a valid integer
      */
     @FXML
     void startOrder(ActionEvent event) throws NumberFormatException {
-        currentOrder = null;
         String temp = s0PhoneTextField.getText();
         long phoneNumber = 0;
         if (temp.equals("")) s0TextArea.setText("Enter Valid Phone Number (Numbers Only)\n");
@@ -91,14 +89,36 @@ public class MainController {
             return;
         }
 
+        if (this.currentOrder != null && this.currentOrder.getPhoneNumber() == phoneNumber) {
+            s0TextArea.setText("Current order with the phone number is already initiated.\n");
+            return;
+        }
+
         this.currentOrder = new Order(phoneNumber);
         s0TextArea.setText("Order " + phoneNumber + " started.\n");
 
         if (store.checkOrder(this.currentOrder)) {
             s0TextArea.setText("Order " + phoneNumber + " already exists.\n");
+            closeStages(pizzaStages);
             currentOrder = null;
             return;
         }
+        closeStages(pizzaStages);
+        if (orderStage != null) {
+            orderStage.close();
+        }
+    }
+
+    /**
+     * Function to close all the stages from an arraylist which keeps references to the stages.
+     * @param stages arraylist of stage
+     */
+    private void closeStages(ArrayList<Stage> stages) {
+        for (Stage x: stages) {
+            x.close();
+        }
+        stages.removeAll(stages);
+
     }
 
     /**
@@ -123,6 +143,7 @@ public class MainController {
         stage.setTitle("Pizza Customization");
         stage.setScene(scene);
         stage.show();
+        pizzaStages.add(stage);
     }
 
     /**
@@ -147,6 +168,7 @@ public class MainController {
         stage.setTitle("Pizza Customization");
         stage.setScene(scene);
         stage.show();
+        pizzaStages.add(stage);
     }
 
     /**
@@ -171,6 +193,7 @@ public class MainController {
         stage.setTitle("Pizza Customization");
         stage.setScene(scene);
         stage.show();
+        pizzaStages.add(stage);
     }
 
     /**
@@ -184,6 +207,9 @@ public class MainController {
             s0TextArea.setText("Please initiate an order first.\n");
             return;
         }
+        if (orderStage != null) {
+            orderStage.close();
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("order-view.fxml"));
         CurrentOrderController controller = new CurrentOrderController();
         controller.setMainController(this);
@@ -194,6 +220,7 @@ public class MainController {
         stage.setTitle("Current Order");
         stage.setScene(scene);
         stage.show();
+        orderStage = stage;
     }
 
     /**
@@ -209,7 +236,6 @@ public class MainController {
         loader.setController(controller);
         Stage stage = new Stage();
         Scene scene = new Scene(loader.load(), 500, 300);
-        StoreOrderController storeView = loader.getController();
         stage.setResizable(false);
         stage.setTitle("Store Orders");
         stage.setScene(scene);

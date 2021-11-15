@@ -1,11 +1,5 @@
 package com.pizzashop;
 
-import javafx.scene.image.Image;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
 /**
  * Class of Pepperoni flavored pizza, which contains its own price and toString() implementation
  */
@@ -31,6 +25,9 @@ public class Deluxe extends Pizza{
      * @return The pizzas price as a double
      */
     public double price() {
+        if (toppings.size() > MAX_TOPPINGS) {
+            return -1;
+        }
         double sizePrice = 0;
         switch (size) {
             case SMALL -> sizePrice = SMALL_PRICE;

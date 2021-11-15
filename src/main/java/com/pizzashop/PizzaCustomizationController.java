@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  * The PizzaCustomizationController class, which controls the Pizza Customization GUI. This controller handles changing
@@ -20,7 +21,7 @@ import java.text.DecimalFormat;
 public class PizzaCustomizationController {
 
     private Pizza pizza;
-    private ObservableList<Topping> availableToppings = FXCollections.observableArrayList(Topping.values());
+    private ArrayList<Topping> availableToppings = new ArrayList<Topping>();
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
 
@@ -70,6 +71,9 @@ public class PizzaCustomizationController {
      */
     public PizzaCustomizationController(String flavor) {
         this.pizza = PizzaMaker.createPizza(flavor);
+        for (Topping x: Topping.values()) {
+            availableToppings.add(x);
+        }
         removeDuplicates(availableToppings, this.pizza.toppings);
     }
 
@@ -121,7 +125,7 @@ public class PizzaCustomizationController {
      * @param target Available toppings list
      * @param source List of toppings on the pizza
      */
-    private void removeDuplicates(ObservableList<Topping> target, ObservableList<Topping> source) {
+    private void removeDuplicates(ArrayList<Topping> target, ArrayList<Topping> source) {
         for (Topping x: source) {
             target.remove(x);
         }
@@ -140,8 +144,10 @@ public class PizzaCustomizationController {
         } else {
             this.pizza.toppings.add(s1AvailableList.getSelectionModel().getSelectedItem());
             this.availableToppings.remove(s1AvailableList.getSelectionModel().getSelectedItem());
-            s1SelectedList.setItems(this.pizza.toppings);
-            s1AvailableList.setItems(this.availableToppings);
+            s1SelectedList.getItems().clear();
+            s1SelectedList.getItems().addAll(this.pizza.toppings);
+            s1AvailableList.getItems().clear();
+            s1AvailableList.getItems().addAll(this.availableToppings);
             s1TextArea.setText(this.pizza.toString());
             s1PriceTextField.setText(df.format(this.pizza.price()) + "");
         }
@@ -157,8 +163,10 @@ public class PizzaCustomizationController {
         if (s1SelectedList.getSelectionModel().getSelectedItem() == null) return;
         this.availableToppings.add(s1SelectedList.getSelectionModel().getSelectedItem());
         this.pizza.toppings.remove(s1SelectedList.getSelectionModel().getSelectedItem());
-        s1SelectedList.setItems(this.pizza.toppings);
-        s1AvailableList.setItems(this.availableToppings);
+        s1SelectedList.getItems().clear();
+        s1SelectedList.getItems().addAll(this.pizza.toppings);
+        s1AvailableList.getItems().clear();
+        s1AvailableList.getItems().addAll(this.availableToppings);
         s1TextArea.setText(this.pizza.toString());
         s1PriceTextField.setText(df.format(this.pizza.price()) + "");
         s1ErrorTextField.setText("");
